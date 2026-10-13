@@ -1,0 +1,15 @@
+{
+  "name": "persistent-reading-list",
+  "version": "1.0.0",
+  "description": "Reading list app with persistence built in",
+  "license": "ISC",
+  "author": "PJM",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "shadow-cljs": "^3.5.7"
+  }
+}
