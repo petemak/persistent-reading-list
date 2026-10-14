@@ -1,45 +1,26 @@
 (ns reading.state
+    "UI state only. The books themselves live in DataScript."
   (:require [clojure.string :as str]))
 
 (def initial-state
   {:draft ""
    :show :all
-   :books []})
+   :storage {:mode :local
+             :status :loading}})
 
+(defn new-book-command
+  "A :book/add command for the draft, or nil if the draft is blank."
+  [draft id now]
+  (let [title (str/trim draft)]
+    (when-not (str/blank? title)
+      [:book/add id title now])))
 
-(defn add-book [state]
-  (let [title (str/trim (:draft state))]
-    (if (str/blank? title)
-      state
-      (-> state
-          (update :books conj {:id (random-uuid)
-                               :title title
-                               :read? false})
-          (assoc :draft "")))))
-
-
-(defn toggle-read
-  [state id]
-  (update state :books
-          (fn [books]
-            (mapv #(if (= id (:id %)) (update % :read? not) %)
-                  books))))
-
-
-(defn remove-book
-  [state id]
-  (update state :books
-          (fn [books]
-            (filterv #(not= id (:id %))
-                     books))))
 
 (defn visible-books
-  "The state key is named :show rather than :filter on purpose. 
-   Destructuring {:keys [filter]} would shadow clojure.core/filter 
-   inside the function, and the :read branch would break. 
-   A test like the one above catches that immediately."
-  [{:keys [books show]}]
+  "List of all boks, read and unread"
+  [books show]
+
   (case show
     :all books
-    :unread (remove :read? books)
-    :read (filter :read? books)))
+    :unread (vec (remove :book/read? books))
+    :read (vec (filter :book/read? books))))
