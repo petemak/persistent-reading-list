@@ -1,14 +1,10 @@
 (ns reading.domain-test
-    "CLJC because it runs twice: in Node (shadow-cljs) and on the JVM (clojure -M:test)."
+  
+  "CLJC because it runs twice: in Node (shadow-cljs) 
+   and on the JVM (clojure -M:test)." 
   (:require  [datascript.core :as d]
              [reading.domain :as domain]
              [clojure.test :refer [deftest is testing]]))
-
-(ns reading.domain-test
-  "Runs twice: in Node (shadow-cljs) and on the JVM (clojure -M:test)."
-  (:require [clojure.test :refer [deftest is testing]]
-            [datascript.core :as d]
-            [reading.domain :as domain]))
 
 (def id1 #uuid "00000000-0000-0000-0000-000000000001")
 (def id2 #uuid "00000000-0000-0000-0000-000000000002")

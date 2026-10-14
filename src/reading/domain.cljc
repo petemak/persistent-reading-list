@@ -31,7 +31,7 @@
 
 ;; ============================================================
 ;; Commands: small domain events, as data
-
+;; ============================================================
 (defn valid-command?
   "Is cmd a well-formed command? The server checks every command
   it receives with this before touching the database."
@@ -46,8 +46,8 @@
                                  (not (str/blank? title))
                                  (int? created-at)))
            :book/set-read (let [[id read?] args]
-                            (and (= 2 (count args)) (uuid? id) (boolean? read?)))
-           :book/remove   (and (= 1 (count args)) (uuid? (first args)))
+                             (and (= 2 (count args)) (uuid? id) (boolean? read?)))
+           :book/remove (and (= 1 (count args)) (uuid? (first args)))
            false))))
 
 (defn command->tx
@@ -74,7 +74,7 @@
 
 ;; ============================================================
 ;; Queries
-
+;; ============================================================
 (def books-query
   '[:find (pull ?e [:book/id :book/title :book/read? :book/created-at])
     :where [?e :book/id]])
