@@ -1,0 +1,12 @@
+{:deps {org.babashka/http-server {:mvn/version "0.1.14"}}
+
+ :tasks  {test    {:doc "Compile and run the test suite once"
+                   :task (shell "npx shadow-cljs compile test")}
+
+          release {:doc "Run the tests, then build the optimised bundle"
+                   :depends [test]
+                   :task (shell "npx shadow-cljs release app")}
+
+          serve   {:doc "Serve public/ at http://localhost:8000"
+                   :requires ([babashka.http-server :as server])
+                   :task (server/exec {:port 8000 :dir "public"})}}}

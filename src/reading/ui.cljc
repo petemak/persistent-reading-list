@@ -59,11 +59,6 @@
     (filter-button show :all "All")
     (filter-button show :unread "Unread")
     (filter-button show :read "Read")]
-   
    (book-list books show (= :loading (:status storage)))
-   
    [:hr]
-   [:button {:on {:click (fn [e] (js/alert "Hi"))}} "Test Action!"]])
-
-
-   
+   [:button {:on {:click (fn [e] (js/alert "Hi"))}} "Test UI"]])

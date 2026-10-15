@@ -1,5 +1,5 @@
 (ns reading.state
-    "UI state only. The books themselves live in DataScript."
+  "UI state only. The books themselves live in DataScript."
   (:require [clojure.string :as str]))
 
 (def initial-state
@@ -15,11 +15,7 @@
     (when-not (str/blank? title)
       [:book/add id title now])))
 
-
-(defn visible-books
-  "List of all boks, read and unread"
-  [books show]
-
+(defn visible-books [books show]
   (case show
     :all books
     :unread (vec (remove :book/read? books))
