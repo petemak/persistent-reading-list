@@ -7,6 +7,7 @@
 (defprotocol Storage
   (load-books [this]
     "A promise of a vector of book maps.")
+
   (persist! [this commands db]
     "Save, after commands were applied to db in memory.
     Returns a promise."))

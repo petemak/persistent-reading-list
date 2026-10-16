@@ -20,7 +20,8 @@
   {:conn conn
    :ui ui-state
    :store store
-   :storage-for (fn [mode] (storage/storage-for mode))})
+   :storage-for (fn [mode]
+                  (storage/storage-for mode))})
 
 (defn render! []
   (r/render (js/document.getElementById "app")
